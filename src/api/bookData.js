@@ -1,11 +1,16 @@
-// import axios from 'axios';
-// import firebaseConfig from './apiKeys';
+import axios from 'axios';
+import firebaseConfig from './apiKeys';
+
 // API CALLS FOR BOOKS
 
-// const dbUrl = firebaseConfig.databaseURL;
+const dbUrl = firebaseConfig.databaseURL;
 
 // TODO: GET BOOKS
-const getBooks = () => {};
+const getBooks = () => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/books.json`)
+    .then((response) => resolve(Object.values(response.data)))
+    .catch((error) => reject(error));
+});
 
 // TODO: DELETE BOOK
 const deleteBook = () => {};
@@ -20,7 +25,11 @@ const createBook = () => {};
 const updateBook = () => {};
 
 // TODO: FILTER BOOKS ON SALE
-const booksOnSale = () => {};
+const booksOnSale = () => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/books.json?orderBy="sale"&equalTo=true`)
+    .then((response) => resolve(Object.values(response.data)))
+    .catch((error) => reject(error));
+});
 
 // TODO: STRETCH...SEARCH BOOKS
 
