@@ -1,4 +1,6 @@
+import { booksOnSale, getBooks } from '../../api/bookData';
 import signOut from '../helpers/auth/signOut';
+import { showBooks } from '../components/pages/books';
 
 // navigation events
 const navigationEvents = () => {
@@ -8,12 +10,12 @@ const navigationEvents = () => {
 
   // TODO: BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
-    console.warn('CLICKED SALE BOOKS');
+    booksOnSale().then((saleBooksArr) => showBooks(saleBooksArr));
   });
 
   // TODO: ALL BOOKS
   document.querySelector('#all-books').addEventListener('click', () => {
-    console.warn('CLICKED ALL BOOKS');
+    getBooks().then((booksArr) => showBooks(booksArr));
   });
 
   // FIXME: STUDENTS Create an event listener for the Authors
