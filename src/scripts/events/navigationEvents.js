@@ -8,12 +8,12 @@ const navigationEvents = () => {
   document.querySelector('#logout-button')
     .addEventListener('click', signOut);
 
-  // TODO: BOOKS ON SALE
+  //  BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
     booksOnSale().then((saleBooksArr) => showBooks(saleBooksArr));
   });
 
-  // TODO: ALL BOOKS
+  //  ALL BOOKS
   document.querySelector('#all-books').addEventListener('click', () => {
     getBooks().then((booksArr) => showBooks(booksArr));
   });
