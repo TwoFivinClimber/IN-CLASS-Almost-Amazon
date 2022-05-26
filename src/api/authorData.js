@@ -29,7 +29,7 @@ const deleteSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-// favorite authors promise
+// FAVORITE AUTHORS
 const favoriteAuthors = () => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/authors.json?orderBy="favorite"&equalTo=true`)
     .then((favArray) => resolve(Object.values(favArray.data)))

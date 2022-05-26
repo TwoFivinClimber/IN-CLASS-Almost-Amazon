@@ -1,5 +1,5 @@
 import { getSingleAuthor } from './authorData';
-import { getSingleBook } from './bookData';
+import { authorsBooks, getSingleBook } from './bookData';
 
 const bookDetails = (bookFirebaseKey) => new Promise((resolve, reject) => {
   getSingleBook(bookFirebaseKey)
@@ -11,4 +11,14 @@ const bookDetails = (bookFirebaseKey) => new Promise((resolve, reject) => {
     }).catch((error) => reject(error));
 });
 
-export default bookDetails;
+const authorDetails = (authFirebaseKey) => new Promise((resolve, reject) => {
+  getSingleAuthor(authFirebaseKey)
+    .then((authorObj) => {
+      authorsBooks(authFirebaseKey)
+        .then((authorBooksArr) => {
+          resolve({ authorBooksArr, ...authorObj });
+        }).catch((error) => reject(error));
+    });
+});
+
+export { bookDetails, authorDetails };
