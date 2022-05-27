@@ -33,7 +33,7 @@ const showAuthorDetail = (object) => {
   // eslint-disable-next-line prefer-destructuring
   const favorite = object.favorite;
   let domString = '';
-  domString += ` <div class="card" style="width: 18rem;">
+  domString += ` <div class="card">
     <div class="card-body">
       <h5 class="card-title">${object.first_name} ${object.last_name}</h5>
       <h6 class="card-subtitle mb-2 text-muted">${object.email}</h6>
