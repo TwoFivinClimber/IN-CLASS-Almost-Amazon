@@ -32,9 +32,9 @@ const showAuthors = (array) => {
 const showAuthorDetail = (object) => {
   // eslint-disable-next-line prefer-destructuring
   const favorite = object.favorite;
-  let domString = '';
-  domString += ` <div class="card">
-    <div class="card-body">
+  let domString = '<div class="auth-view">';
+  domString += ` <div class="auth-card card">
+    <div class= card-body">
       <h5 class="card-title">${object.first_name} ${object.last_name}</h5>
       <h6 class="card-subtitle mb-2 text-muted">${object.email}</h6>
       <h6 class="fav-h6 card-subtitle mb-2 text-muted">${favorite ? 'Favorite Author' : ''}</h6>
@@ -43,7 +43,7 @@ const showAuthorDetail = (object) => {
       <i class="btn btn-danger fas fa-trash-alt" id="delete-author-btn--${object.firebaseKey}"></i>
     </div>
   </div>`;
-
+  domString += '<div class="author-books">';
   object.authorBooksArr.forEach((book) => {
     domString += `
       <div class="card">
@@ -58,6 +58,7 @@ const showAuthorDetail = (object) => {
         </div>
       </div>`;
   });
+  domString += '</div></div>';
   renderToDOM('#store', domString);
 };
 
