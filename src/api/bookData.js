@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import { showBooks } from '../scripts/components/pages/books';
 import firebaseConfig from './apiKeys';
 
 // API CALLS FOR BOOKS
@@ -35,11 +36,24 @@ const authorsBooks = (firebaseKey) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-// TODO: CREATE BOOK
-const createBook = () => {};
+// CREATE BOOK
+const createBook = (bookObj) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/books.json`, bookObj)
+    .then((response) => {
+      const value = { firebaseKey: response.data.name };
+      axios.patch(`${dbUrl}/books/${response.data.name}.json`, value)
+        .then(() => {
+          getBooks().then((booksArr) => resolve(booksArr));
+        });
+    }).catch(reject);
+});
 
 // TODO: UPDATE BOOK
-const updateBook = () => {};
+const updateBook = (bookObj) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/books/${bookObj.firebaseKey}.json`, bookObj)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
 
 // TODO: FILTER BOOKS ON SALE
 const booksOnSale = () => new Promise((resolve, reject) => {
