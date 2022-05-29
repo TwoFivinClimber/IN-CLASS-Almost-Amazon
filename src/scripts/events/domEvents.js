@@ -18,12 +18,12 @@ const domEvents = () => {
       }
     }
 
-    // TODO: CLICK EVENT FOR SHOWING FORM FOR ADDING A BOOK
+    // CLICK EVENT FOR SHOWING FORM FOR ADDING A BOOK
     if (e.target.id.includes('add-book-btn')) {
       addBookForm();
     }
 
-    // TODO: CLICK EVENT EDITING/UPDATING A BOOK
+    // CLICK EVENT EDITING/UPDATING A BOOK
     if (e.target.id.includes('edit-book-btn')) {
       const [, firebaseKey] = e.target.id.split('--');
       getSingleBook(firebaseKey).then((bookObj) => addBookForm(bookObj));
