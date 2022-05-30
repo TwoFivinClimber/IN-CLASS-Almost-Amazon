@@ -45,8 +45,12 @@ const favoriteAuthors = () => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-// FIXME: UPDATE AUTHOR
-const updateAuthor = () => {};
+//  UPDATE AUTHOR
+const updateAuthor = (authObj) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/authors/${authObj.firebaseKey}.json`, authObj)
+    .then((response) => resolve(response))
+    .catch((error) => reject(error));
+});
 
 // TODO: GET A SINGLE AUTHOR'S BOOKS
 const getAuthorBooks = () => {};

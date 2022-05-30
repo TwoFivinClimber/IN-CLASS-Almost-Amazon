@@ -1,4 +1,4 @@
-import { createAuthor } from '../../api/authorData';
+import { createAuthor, getAuthors, updateAuthor } from '../../api/authorData';
 import { createBook, getBooks, updateBook } from '../../api/bookData';
 import { showAuthors } from '../components/pages/authors';
 // import addBookForm from '../components/forms/addBookForm';
@@ -37,7 +37,7 @@ const formEvents = () => {
       });
     }
 
-    // FIXME: ADD CLICK EVENT FOR SUBMITTING FORM FOR ADDING AN AUTHOR
+    // ADD CLICK EVENT FOR SUBMITTING FORM FOR ADDING AN AUTHOR
     if (e.target.id.includes('submit-author')) {
       const authorObj = {
         first_name: document.querySelector('#first_name').value,
@@ -49,6 +49,19 @@ const formEvents = () => {
       });
     }
     // FIXME:ADD CLICK EVENT FOR EDITING AN AUTHOR
+    if (e.target.id.includes('update-author')) {
+      const [, firebaseKey] = e.target.id.split('--');
+      const authorObj = {
+        first_name: document.querySelector('#first_name').value,
+        last_name: document.querySelector('#last_name').value,
+        email: document.querySelector('#email').value,
+        firebaseKey
+      };
+      console.warn(authorObj);
+      updateAuthor(authorObj).then(() => {
+        getAuthors().then((authorArr) => showAuthors(authorArr));
+      });
+    }
   });
 };
 
