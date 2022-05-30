@@ -7,7 +7,7 @@ const selectAuthor = (authorId) => {
     <option value="">Select an Author</option>`;
   if (authorId) {
     getSingleAuthor(authorId).then((authorObj) => {
-      console.warn(authorObj);
+      console.warn(authorObj.data);
       domString += `
         <option 
           value="${authorObj.firebaseKey}" 'selected'>
