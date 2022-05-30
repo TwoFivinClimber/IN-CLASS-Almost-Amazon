@@ -23,8 +23,8 @@ const authorDetails = (authFirebaseKey) => new Promise((resolve, reject) => {
 
 const deleteAuthorBooks = (authorId) => new Promise((resolve, reject) => {
   authorsBooks(authorId).then((booksArr) => {
-    const deleteBookPromises = booksArr.map((book) => deleteBook(book.firebaseKey));
-    Promise.all(deleteBookPromises).then(() => {
+    const deleteAuthBooks = booksArr.map((book) => deleteBook(book.firebaseKey));
+    Promise.all(deleteAuthBooks).then(() => {
       resolve(deleteSingleAuthor(authorId));
     });
   }).catch((error) => reject(error));
