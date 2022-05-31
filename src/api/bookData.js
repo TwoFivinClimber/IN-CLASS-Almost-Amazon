@@ -9,8 +9,13 @@ const dbUrl = firebaseConfig.databaseURL;
 //  GET BOOKS
 const getBooks = () => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/books.json`)
-    .then((response) => resolve(Object.values(response.data)))
-    .catch((error) => reject(error));
+    .then((response) => {
+      if (response.data) {
+        resolve(Object.values(response.data));
+      } else {
+        resolve([]);
+      }
+    }).catch((error) => reject(error));
 });
 
 //  DELETE BOOK

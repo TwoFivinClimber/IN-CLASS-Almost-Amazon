@@ -1,18 +1,23 @@
 import clearDom from '../../helpers/clearDom';
 import renderToDOM from '../../helpers/renderToDom';
 
+const emptyAuthors = () => {
+  const domString = '<h1>No Authors</h1>';
+  renderToDOM('#store', domString);
+};
+
 const showAuthors = (array) => {
   clearDom();
 
   const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-author-btn">Add An Author</button>';
 
   renderToDOM('#add-button', btnString);
-
-  let domString = '';
-  array.forEach((item) => {
+  if (array.length) {
+    let domString = '';
+    array.forEach((item) => {
     // eslint-disable-next-line prefer-destructuring
-    const favorite = item.favorite;
-    domString += `
+      const favorite = item.favorite;
+      domString += `
     <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">${item.first_name} ${item.last_name}</h5>
@@ -25,8 +30,11 @@ const showAuthors = (array) => {
       </div>
     </div>
     `;
-  });
-  renderToDOM('#store', domString);
+    });
+    renderToDOM('#store', domString);
+  } else {
+    emptyAuthors();
+  }
 };
 
 const showAuthorDetail = (object) => {
@@ -59,11 +67,6 @@ const showAuthorDetail = (object) => {
       </div>`;
   });
   domString += '</div></div>';
-  renderToDOM('#store', domString);
-};
-
-const emptyAuthors = () => {
-  const domString = '<h1>No Authors</h1>';
   renderToDOM('#store', domString);
 };
 
