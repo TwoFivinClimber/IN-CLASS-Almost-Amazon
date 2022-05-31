@@ -7,15 +7,15 @@ const selectAuthor = (authorId) => {
     <option value="">Select an Author</option>`;
   if (authorId) {
     getSingleAuthor(authorId).then((authorObj) => {
-      console.warn(authorObj.data);
+      console.warn(authorObj);
       domString += `
         <option 
-          value="${authorObj.firebaseKey}" 'selected'>
+          value="${authorObj.firebaseKey}" selected required>
             ${authorObj.first_name} ${authorObj.last_name}
-            <option value="test_value"></option>
-        </option></select>`;
+        </option>
+        </select>`;
+      renderToDOM('#select-author', domString);
     });
-    renderToDOM('#select-author', domString);
   } else {
     getAuthors().then((authorsArray) => {
       authorsArray.forEach((author) => {
