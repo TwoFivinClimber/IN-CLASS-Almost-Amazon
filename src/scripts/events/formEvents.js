@@ -49,7 +49,7 @@ const formEvents = () => {
         showAuthors(authorArr);
       });
     }
-    // FIXME:ADD CLICK EVENT FOR EDITING AN AUTHOR
+    // ADD CLICK EVENT FOR EDITING AN AUTHOR
     if (e.target.id.includes('update-author')) {
       const [, firebaseKey] = e.target.id.split('--');
       const authorObj = {
