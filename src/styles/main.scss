@@ -106,13 +106,14 @@ body {
 .auth-view{
   display: flex;
   flex-direction: column;
+  width: 100%;
+  align-items: center;
 }
 
 .auth-card{
   background-color: black;
   color: antiquewhite;
   width: 100%;
-  justify-content: center;
 }
 .author-books{
   display: flex;
