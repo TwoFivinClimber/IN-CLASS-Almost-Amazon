@@ -7,8 +7,8 @@ import firebaseConfig from './apiKeys';
 const dbUrl = firebaseConfig.databaseURL;
 
 //  GET BOOKS
-const getBooks = () => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/books.json`)
+const getBooks = (uid) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/books.json?orderBy="uid"&equalTo="${uid}"`)
     .then((response) => {
       if (response.data) {
         resolve(Object.values(response.data));
@@ -42,13 +42,13 @@ const authorsBooks = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 // CREATE BOOK
-const createBook = (bookObj) => new Promise((resolve, reject) => {
+const createBook = (bookObj, uid) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/books.json`, bookObj)
     .then((response) => {
       const value = { firebaseKey: response.data.name };
       axios.patch(`${dbUrl}/books/${response.data.name}.json`, value)
         .then(() => {
-          getBooks().then((booksArr) => resolve(booksArr));
+          getBooks(uid).then((booksArr) => resolve(booksArr));
         });
     }).catch(reject);
 });

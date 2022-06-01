@@ -2,8 +2,10 @@ import clearDom from '../../helpers/clearDom';
 import renderToDOM from '../../helpers/renderToDom';
 
 const emptyBooks = () => {
-  const domString = '<h1>No Items</h1>';
+  const domString = '<h1>Get started by adding a Book</h1>';
   renderToDOM('#store', domString);
+  const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-book-btn">Add A Book</button>';
+  renderToDOM('#add-button', btnString);
 };
 
 const showBooks = (array) => {

@@ -2,8 +2,10 @@ import clearDom from '../../helpers/clearDom';
 import renderToDOM from '../../helpers/renderToDom';
 
 const emptyAuthors = () => {
-  const domString = '<h1>No Authors</h1>';
+  const domString = '<h1>Get started by adding an Author</h1>';
   renderToDOM('#store', domString);
+  const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-author-btn">Add An Author</button>';
+  renderToDOM('#add-button', btnString);
 };
 
 const showAuthors = (array) => {
