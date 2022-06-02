@@ -5,7 +5,7 @@ import viewBook from '../components/pages/viewBook';
 import { showAuthorDetail, showAuthors } from '../components/pages/authors';
 import addBookForm from '../components/forms/addBookForm';
 import addAuthorForm from '../components/forms/addAuthorForm';
-import { getSingleAuthor } from '../../api/authorData';
+import { getAuthors, getSingleAuthor } from '../../api/authorData';
 
 const domEvents = (uid) => {
   document.querySelector('#main-container').addEventListener('click', (e) => {
@@ -53,7 +53,11 @@ const domEvents = (uid) => {
       // eslint-disable-next-line no-alert
       if (window.confirm('Want to delete?')) {
         const [, firebaseKey] = e.target.id.split('--');
-        deleteAuthorBooks(firebaseKey).then(showAuthors);
+        deleteAuthorBooks(firebaseKey).then(() => {
+          getAuthors(uid).then((authorsArray) => {
+            showAuthors(authorsArray);
+          });
+        });
       }
     }
 

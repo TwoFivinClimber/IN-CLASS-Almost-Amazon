@@ -46,19 +46,27 @@ const navigationEvents = (uid) => {
   });
 
   // STRETCH: SEARCH
+  // MAKE A CALL TO THE API TO FILTER ON THE BOOKS
+  // IF THE SEARCH DOESN'T RETURN ANYTHING, SHOW THE EMPTY STORE
+  // OTHERWISE SHOW THE STORE
   document.querySelector('#search').addEventListener('keyup', (e) => {
     const searchValue = document.querySelector('#search').value.toLowerCase();
-    console.warn(searchValue);
-
-    // WHEN THE USER PRESSES ENTER, MAKE THE API CALL AND CLEAR THE INPUT
     if (e.keyCode === 13) {
-      // MAKE A CALL TO THE API TO FILTER ON THE BOOKS
-      // IF THE SEARCH DOESN'T RETURN ANYTHING, SHOW THE EMPTY STORE
-      // OTHERWISE SHOW THE STORE
-
-      document.querySelector('#search').value = '';
+      getBooks(uid).then((booksArr) => {
+        // eslint-disable-next-line no-restricted-syntax
+        const renderArray = [];
+        // eslint-disable-next-line no-restricted-syntax
+        for (const book of booksArr) {
+          if (book.title.toLowerCase().includes(searchValue)) {
+            renderArray.push(book);
+          }
+        }
+        // eslint-disable-next-line no-unused-expressions
+        renderArray.length ? showBooks(renderArray) : emptyBooks('Try another Title');
+      });
     }
   });
+  document.querySelector('#search').value = '';
 };
 
 export default navigationEvents;
