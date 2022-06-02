@@ -4,7 +4,7 @@ import { showAuthors } from '../components/pages/authors';
 // import addBookForm from '../components/forms/addBookForm';
 import { showBooks } from '../components/pages/books';
 
-const formEvents = () => {
+const formEvents = (uid) => {
   document.querySelector('#main-container').addEventListener('submit', (e) => {
     e.preventDefault();
     //  CLICK EVENT FOR SUBMITTING FORM FOR ADDING A BOOK
@@ -14,10 +14,11 @@ const formEvents = () => {
         image: document.querySelector('#image').value,
         price: document.querySelector('#price').value,
         description: document.querySelector('#description').value,
-        sale: document.querySelector('#sale').value,
+        sale: document.querySelector('#sale').checked,
         author_id: document.querySelector('#author_id').value,
+        uid: `${uid}`
       };
-      createBook(bookObj).then((booksArray) => showBooks(booksArray));
+      createBook(bookObj, uid).then((booksArray) => showBooks(booksArray));
     }
 
     // CLICK EVENT FOR EDITING A BOOK
@@ -28,7 +29,7 @@ const formEvents = () => {
         image: document.querySelector('#image').value,
         price: document.querySelector('#price').value,
         description: document.querySelector('#description').value,
-        sale: document.querySelector('#sale').value,
+        sale: document.querySelector('#sale').checked,
         author_id: document.querySelector('#author_id').value,
         firebaseKey
       };
@@ -43,9 +44,10 @@ const formEvents = () => {
         first_name: document.querySelector('#first_name').value,
         last_name: document.querySelector('#last_name').value,
         email: document.querySelector('#email').value,
-        favorite: document.querySelector('#favorite').checked
+        favorite: document.querySelector('#favorite').checked,
+        uid: `${uid}`
       };
-      createAuthor(authorObj).then((authorArr) => {
+      createAuthor(authorObj, uid).then((authorArr) => {
         showAuthors(authorArr);
       });
     }
@@ -60,7 +62,7 @@ const formEvents = () => {
         firebaseKey
       };
       updateAuthor(authorObj).then(() => {
-        getAuthors().then((authorArr) => showAuthors(authorArr));
+        getAuthors(uid).then((authorArr) => showAuthors(authorArr));
       });
     }
   });
