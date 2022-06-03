@@ -13,7 +13,6 @@ const showBooks = (array) => {
 
   const btnString = '<button class="btn btn-success btn-lg mb-4" id="add-book-btn">Add A Book</button>';
   renderToDOM('#add-button', btnString);
-
   if (array.length) {
     let domString = '';
     array.forEach((item) => {
