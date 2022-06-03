@@ -34,7 +34,7 @@ const formEvents = (uid) => {
         firebaseKey
       };
       updateBook(bookObj).then(() => {
-        getBooks().then((response) => showBooks(response));
+        getBooks(uid).then((response) => showBooks(response));
       });
     }
 
