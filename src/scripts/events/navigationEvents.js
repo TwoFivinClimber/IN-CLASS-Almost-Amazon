@@ -3,6 +3,7 @@ import signOut from '../helpers/auth/signOut';
 import { emptyBooks, showBooks } from '../components/pages/books';
 import { getAuthors } from '../../api/authorData';
 import { showAuthors, emptyAuthors } from '../components/pages/authors';
+import navBar from '../components/navBar';
 
 // navigation events
 const navigationEvents = (uid) => {
@@ -12,15 +13,18 @@ const navigationEvents = (uid) => {
 
   //  BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
+    navBar('saleBooks');
+    navigationEvents(uid);
     getBooks(uid).then((booksArray) => {
       const saleBooksArr = booksArray.filter((book) => book.sale);
-      console.warn(saleBooksArr);
       showBooks(saleBooksArr);
     });
   });
 
   //  ALL BOOKS
   document.querySelector('#all-books').addEventListener('click', () => {
+    navBar('allBooks');
+    navigationEvents(uid);
     getBooks(uid).then((booksArr) => {
       if (booksArr.length) {
         showBooks(booksArr);
@@ -32,6 +36,8 @@ const navigationEvents = (uid) => {
 
   // STUDENTS Create an event listener for the Authors
   document.querySelector('#authors').addEventListener('click', () => {
+    navBar('authors');
+    navigationEvents(uid);
     getAuthors(uid).then((authorsArray) => {
       // eslint-disable-next-line no-unused-expressions
       authorsArray.length ? showAuthors(authorsArray) : emptyAuthors();
@@ -39,6 +45,8 @@ const navigationEvents = (uid) => {
   });
   // Favorite Authors
   document.querySelector('#fav-authors').addEventListener('click', () => {
+    navBar('favAuthors');
+    navigationEvents(uid);
     getAuthors(uid).then((authorsArray) => {
       const favArray = authorsArray.filter((author) => author.favorite);
       showAuthors(favArray);

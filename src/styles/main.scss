@@ -7,9 +7,13 @@ body {
 
 .navbar-dark .navbar-brand {
   font-family: "Oregano", cursive !important;
-  color: red;
+  // color: #b50021;
   font-weight: 900;
-  font-size: 2em;
+  font-size: 2.5em;
+  background-clip: text;
+  background: -webkit-linear-gradient(#bc4749, #f7b801);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .cart-items {
@@ -117,4 +121,7 @@ body {
 }
 .author-books{
   display: flex;
+}
+.highlight{
+  border-bottom: #bc4749 2px solid;
 }
